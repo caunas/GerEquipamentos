@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="GerEquipamentos:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/GerEquipamentos_jar</output-path>
+    <root id="archive" name="GerEquipamentos_jar.jar">
+      <element id="module-output" name="GerEquipamentos" />
+    </root>
+  </artifact>
+</component>

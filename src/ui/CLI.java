@@ -6,7 +6,9 @@ public class CLI{
   EquipamentoDAO object = new EquipamentoDAO();
   public static void show_menu(){
     System.out.println("Selecione uma opção");
-    System.out.println("1 - EquipamentoDAO (Teste de importação)");;
+    System.out.println("=========================================");
+    System.out.println("1 - EquipamentoDAO (Teste de importação)");
+    System.out.println("=========================================");
     System.out.println("0 - Sair");
   }
 

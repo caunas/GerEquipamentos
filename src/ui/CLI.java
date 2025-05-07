@@ -12,6 +12,9 @@ public class CLI{
 
   public static void catch_option(int escolha){
     switch(escolha){
+      case 0:
+        System.out.println("Encerrando...");
+        System.exit(0);
       case 1:
         EquipamentoDAO.teste();
         break;

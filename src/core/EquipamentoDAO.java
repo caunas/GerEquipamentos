@@ -1,5 +1,5 @@
 package core;
-import core.Equipamento.java
+import core.Equipamento;
 
 public class EquipamentoDAO {
   public static void teste(){

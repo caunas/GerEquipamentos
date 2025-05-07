@@ -1,9 +1,9 @@
 package Main;
-import frontend.CLI;
+import ui.CLI;
 
 public class Main {
     public static void main(String[] args) {
         CLI object = new CLI();
-        CLI.show_menu();
+        CLI.call();
     }
 }

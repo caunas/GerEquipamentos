@@ -1,4 +1,3 @@
-package Main;
 import ui.CLI;
 
 public class Main {

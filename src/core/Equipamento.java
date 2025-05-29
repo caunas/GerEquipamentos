@@ -8,7 +8,6 @@ package core;
 import java.util.Date;
 
 public class Equipamento {
-  public static void main(String[] args){}
     private int id;
     private String nome;
     private String categoria;
@@ -35,6 +34,7 @@ public class Equipamento {
           this.categoria = categoria;
 
          }
+         public int getId(){return id;}
          public String getDetalhes(){
           return detalhes;
          }

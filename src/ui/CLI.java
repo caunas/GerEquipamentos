@@ -19,7 +19,24 @@ public class CLI{
       do {
         switch(menu(scanner)) {
           case 1:
-            EquipamentoDAO.teste(); // Cadastrar equipamento, chamar func cadastrar do EquipamentoDAO
+            // Cadastrar equipamento, chamar func cadastrar do EquipamentoDAO
+            EquipamentoDAO.adicionar(
+                    "teste",
+                    "categoria teste",
+                    "detalhes teste"
+            );
+            break;
+          case 2:
+            System.out.println(EquipamentoDAO.listarTodos());
+            break;
+          case 3:
+            EquipamentoDAO.atualizar(
+                    2,
+                    "nome",
+                    "Atualizar Funciona");
+            break;
+          case 4:
+            EquipamentoDAO.remover(3);
             break;
           case 5:
             saida = true;

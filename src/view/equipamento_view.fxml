@@ -1,3 +1,8 @@
+/**
+ * Autor: Mariana
+ * Esse arquivo é responsável pela criação da interface gráfica
+ * */
+
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>

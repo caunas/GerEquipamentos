@@ -1,5 +1,11 @@
 package control;
 
+/**
+ * Autor: Robert
+ * Essa classe é responsável por gerênciar a lista de equipamentos
+ * Jeremias 29:11
+ * */
+
 import core.Equipamento;
 import core.EquipamentoDAO;
 import javafx.collections.FXCollections;

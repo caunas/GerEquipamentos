@@ -9,7 +9,7 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="control.EquipamentoControl"
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="ui.GUI.EquipamentoControl"
             style="-fx-background-color: #f8f9fa; -fx-font-family: 'Segoe UI'; -fx-font-size: 14px;">
 
     <!-- Topo - Cabeçalho -->

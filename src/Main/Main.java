@@ -1,5 +1,6 @@
 package Main;
 
+// JavaFX
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,19 +8,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
-import java.io.FileNotFoundException;
-import java.net.URL;
+import java.io.FileNotFoundException; // complemento de exceções
+import java.net.URL; // lib de URL, converte o caminho do fxml para uma URL
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
         try {
-            // Caminho absoluto baseado na URL que você obteve
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/ui/GUI/view/equipamento_view.fxml"));
 
-            // Verificação extra
             URL fxmlUrl = getClass().getResource("/ui/GUI/view/equipamento_view.fxml");
             if (fxmlUrl == null) {
                 throw new FileNotFoundException("Arquivo FXML não encontrado no caminho: /ui/GUI/view/equipamento_view.fxml");
@@ -44,6 +43,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        // carregar interface grafica
         launch(args);
     }
 }

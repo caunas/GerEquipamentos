@@ -1,7 +1,7 @@
 /**
  *Autor: Vinicius
  * A classe CLI é responsável pela interface de linha de comando
- * Essa classe deve ser depreciada com a implementação da interface gráfica
+ * CLASSE DEPRECIADA
  **/
 package ui.CLI;
 import java.util.Scanner;

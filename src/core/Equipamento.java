@@ -10,6 +10,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class Equipamento {
   
@@ -47,5 +48,8 @@ public class Equipamento {
     public void setDetalhes(String detalhes) { this.detalhes.set(detalhes); }
     public StringProperty detalhesProperty() { return detalhes; }
 
-    public Date getDataCadastro() { return dataCadastro; }
+    public String getDataCadastro() {
+        SimpleDateFormat DateFormater = new SimpleDateFormat("dd/MM/yyyy");
+        return DateFormater.format(dataCadastro);
+    }
 }   

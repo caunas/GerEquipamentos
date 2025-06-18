@@ -4,7 +4,7 @@
 Sistema para cadastro e gerenciamento de equipamentos
 
 ### Metas Essenciais
-- [x] Cadastro, consulta e listagem de wquipamentos
+- [x] Cadastro, consulta e listagem de equipamentos
 - [x] Menu funcional com operações
 ### Metas Importantes
 - [ ] Atualização e exclusão funcionando corretamente

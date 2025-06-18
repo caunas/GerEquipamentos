@@ -1,76 +1,126 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="ui.GUI.EquipamentoControl"
-            style="-fx-background-color: #f8f9fa; -fx-font-family: 'Segoe UI'; -fx-font-size: 14px;">
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="787.0" prefWidth="1027.0" style="-fx-background-color: #f8f9fa; -fx-font-family: 'Segoe UI'; -fx-font-size: 14px;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.GUI.EquipamentoControl">
 
     <!-- Topo - Cabeçalho -->
     <top>
         <VBox style="-fx-background-color: #343a40; -fx-padding: 15;">
-            <Label text="Sistema de Gestão de Equipamentos"
-                   style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+            <Label style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" text="Sistema de Gestão de Equipamentos" />
         </VBox>
     </top>
-
     <!-- Centro - Conteúdo Principal -->
     <center>
         <VBox spacing="20" style="-fx-padding: 20;">
-            <!-- Formulário -->
-            <GridPane hgap="15" vgap="15" alignment="TOP_CENTER">
-                <padding><Insets top="10" right="20" bottom="20" left="20"/></padding>
+            <!-- Abas de formularios -->
+             <TabPane prefHeight="333.0" prefWidth="799.0" tabClosingPolicy="UNAVAILABLE">
+               <tabs>
+                   <!-- Aba de cadastro -->
+                   <Tab text="Cadastro">
+                       <content>
+                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="451.0" prefWidth="799.0">
+                               <children>
+                                   <Label layoutX="381.0" layoutY="14.0" prefHeight="23.0" prefWidth="228.0" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #495057;" text="Cadastro de Equipamentos" textAlignment="CENTER" />
+                                   <!-- Formulário -->
+                                   <GridPane alignment="TOP_CENTER" hgap="15" layoutX="93.0" layoutY="43.0" prefHeight="242.0" prefWidth="803.0" vgap="15">
+                                       <padding><Insets bottom="20" left="20" right="20" top="10" /></padding>
 
-                <Label text="Cadastro de Equipamentos"
-                       style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #495057;"
-                       GridPane.columnSpan="2" GridPane.halignment="CENTER"/>
+                                       <Label style="-fx-font-weight: bold;" text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                       <TextField fx:id="nomeField" prefHeight="30.0" prefWidth="260.0" promptText="Digite o nome do equipamento" style="-fx-pref-width: 300; -fx-background-radius: 4; -fx-border-color: #ced4da; -fx-border-radius: 4; -fx-padding: 5;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                <Label text="Nome:" style="-fx-font-weight: bold;" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                <TextField fx:id="nomeField" promptText="Digite o nome do equipamento"
-                           style="-fx-pref-width: 300; -fx-background-radius: 4; -fx-border-color: #ced4da; -fx-border-radius: 4; -fx-padding: 5;"
-                           GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                                       <Label style="-fx-font-weight: bold;" text="Categoria:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                       <ChoiceBox fx:id="categoriaSelector" prefHeight="28.0" prefWidth="334.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-                <Label text="Tipo:" style="-fx-font-weight: bold;" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                <TextField fx:id="tipoField" promptText="Digite o tipo do equipamento"
-                           style="-fx-pref-width: 300; -fx-background-radius: 4; -fx-border-color: #ced4da; -fx-border-radius: 4; -fx-padding: 5;"
-                           GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                                       <Label style="-fx-font-weight: bold;" text="Detalhes:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                                       <TextField fx:id="detalhesField" prefHeight="66.0" prefWidth="334.0" promptText="Digite os detalhes do equipamento" style="-fx-pref-width: 300; -fx-background-radius: 4; -fx-border-color: #ced4da; -fx-border-radius: 4; -fx-padding: 5;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-                <Label text="Buscar:" style="-fx-font-weight: bold;" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-                <TextField fx:id="buscaField" promptText="ID, Nome ou Tipo"
-                           style="-fx-pref-width: 300; -fx-background-radius: 4; -fx-border-color: #ced4da; -fx-border-radius: 4; -fx-padding: 5;"
-                           GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                                       <!-- Botões de Ação -->
+                                       <HBox alignment="CENTER" spacing="15" GridPane.columnSpan="2" GridPane.rowIndex="4">
+                                           <Button onAction="#adicionarEquipamento" style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 15; -fx-background-radius: 4; -fx-cursor: hand;" text="Adicionar" />
+                                           <Button onAction="#limparCampos" style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 15; -fx-background-radius: 4; -fx-cursor: hand;" text="Limpar" />
+                                       </HBox>
+                                       <columnConstraints>
+                                           <ColumnConstraints />
+                                           <ColumnConstraints />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                           <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+                                           <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
+                                           <RowConstraints />
+                                           <RowConstraints />
+                                           <RowConstraints />
+                                       </rowConstraints>
+                                   </GridPane>
+                               </children>
+                           </AnchorPane>
+                       </content>
+                   </Tab>
+                   <!-- Aba de busca consulta e busca -->
+                   <Tab text="Consulta e Busca">
+                   <content>
+                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="451.0" prefWidth="799.0">
+                            <children>
+                                <Label layoutX="397.0" layoutY="14.0" prefHeight="23.0" prefWidth="193.0" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #495057;" text="Busca de Equipamento" textAlignment="CENTER" />
+                                <!-- Formulário -->
+                                <GridPane alignment="TOP_CENTER" hgap="15" layoutX="92.0" layoutY="54.0" prefHeight="39.0" prefWidth="803.0" vgap="15">
+                                    <padding><Insets bottom="20" left="20" right="20" top="10" /></padding>
+                                    <Label prefHeight="18.0" prefWidth="27.0" style="-fx-font-weight: bold;" text="ID:" textAlignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                    <TextField fx:id="buscaField" prefHeight="30.0" prefWidth="120.0" promptText="ID" style=" -fx-background-radius: 4; -fx-border-color: #ced4da; -fx-border-radius: 4; -fx-padding: 5;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin></TextField>
+                                    <Label style="-fx-font-weight: bold;" text="Categoria:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                                    <ChoiceBox fx:id="categoriaSelectorBusca" prefHeight="28.0" prefWidth="236.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-                <!-- Botões de Ação -->
-                <HBox spacing="15" alignment="CENTER" GridPane.rowIndex="4" GridPane.columnSpan="2">
-                    <Button text="Adicionar" onAction="#adicionarEquipamento"
-                            style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 15; -fx-background-radius: 4; -fx-cursor: hand;"/>
-                    <Button text="Atualizar" onAction="#atualizarEquipamento"
-                            style="-fx-background-color: #17a2b8; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 15; -fx-background-radius: 4; -fx-cursor: hand;"/>
-                    <Button text="Remover" onAction="#removerEquipamento"
-                            style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 15; -fx-background-radius: 4; -fx-cursor: hand;"/>
-                    <Button text="Limpar" onAction="#limparCampos"
-                            style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 15; -fx-background-radius: 4; -fx-cursor: hand;"/>
-                </HBox>
-            </GridPane>
+                                    <!-- Botões de Ação -->
+                                    <Button onAction="#buscaPorId" style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 15; -fx-background-radius: 4; -fx-cursor: hand;" text="Buscar por ID" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <Button onAction="#buscaPorCategoria" style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 15; -fx-background-radius: 4; -fx-cursor: hand;" text="Buscar por categoria" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                    <columnConstraints>
+                                        <ColumnConstraints />
+                                        <ColumnConstraints />
+                                 <ColumnConstraints />
+                                 <ColumnConstraints />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
+                                        <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+                                        <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+                                        <RowConstraints />
+                                 <RowConstraints />
+                                    </rowConstraints>
+                                </GridPane>
+                                 <Button layoutX="406.0" layoutY="189.0" onAction="#atualizarTabela" prefHeight="34.0" prefWidth="175.0" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 15; -fx-background-radius: 4; -fx-cursor: hand;" text="Ver todos os itens" textAlignment="CENTER" />
+                            </children>
+                         </AnchorPane>
+                   </content>
+                 </Tab>
+                   <!-- Aba de configurações -->
+                   <Tab text="Configurações">
 
-            <!-- Tabela de Equipamentos -->
-            <VBox spacing="10" style="-fx-padding: 0 20;">
-                <HBox alignment="CENTER_LEFT" spacing="10">
-                    <Label text="Lista de Equipamentos Cadastrados"
-                           style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #495057;"/>
-                    <Label fx:id="totalLabel" text="0 equipamentos"
-                           style="-fx-font-weight: bold; -fx-text-fill: #17a2b8;"/>
-                </HBox>
+                   </Tab>
+               </tabs>
+             </TabPane>
+                <!-- Tabela de Equipamentos -->
+                <VBox spacing="10" style="-fx-padding: 0 20;">
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #495057;" text="Lista de Equipamentos Cadastrados" />
+                        <Label fx:id="totalLabel" style="-fx-font-weight: bold; -fx-text-fill: #17a2b8;" text="0 equipamentos" />
+                    </HBox>
 
-                <TableView fx:id="tabela" style="-fx-pref-height: 300;">
-                    <columns>
-                        <TableColumn fx:id="colId" text="ID" prefWidth="60" style="-fx-alignment: CENTER; -fx-font-weight: bold;"/>
-                        <TableColumn fx:id="colNome" text="Equipamento" prefWidth="250" style="-fx-font-weight: bold;"/>
-                        <TableColumn fx:id="colTipo" text="Tipo/Modelo" prefWidth="200" style="-fx-font-weight: bold;"/>
-                    </columns>
-                </TableView>
-            </VBox>
+                    <TableView fx:id="tabela" prefHeight="0.0" prefWidth="759.0" style="-fx-pref-height: 300;">
+                        <columns>
+                            <TableColumn fx:id="colId" minWidth="0.0" prefWidth="33.0" style="-fx-alignment: CENTER; -fx-font-weight: bold;" text="ID" />
+                            <TableColumn fx:id="colNome" prefWidth="221.0" style="-fx-font-weight: bold;" text="Nome" />
+                            <TableColumn fx:id="colCategoria" prefWidth="235.0" style="-fx-font-weight: bold;" text="Categoria" />
+                            <TableColumn fx:id="colData" prefWidth="179.0" text="Data de Cadastro" />
+                            <TableColumn fx:id="colDetalhes" prefWidth="277.0" text="Detalhes" />
+                        </columns>
+                    </TableView>
+                </VBox>
         </VBox>
     </center>
 </BorderPane>

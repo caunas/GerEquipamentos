@@ -12,6 +12,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,6 +29,7 @@ public class EquipamentoControl {
     @FXML private ChoiceBox<String> categoriaSelector;
     @FXML private ChoiceBox<String> categoriaSelectorBusca;
     @FXML private TextField detalhesField;
+    @FXML private TextField idRemoverField;
 
     // tabela e colunas
     @FXML private TableView<Equipamento> tabela;
@@ -48,13 +51,14 @@ public class EquipamentoControl {
     );
 
     @FXML
-    public void initialize() {
+    public void initialize(){
         // Inicializa as colunas da tabela com os dados do Equipamento
         colId.setCellValueFactory(cell -> new javafx.beans.property.SimpleIntegerProperty(cell.getValue().getId()).asObject());
         colNome.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getNome()));
         colCategoria.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getCategoria()));
         colData.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getDataCadastro()));
         colDetalhes.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getDetalhes()));
+
 
         // Inicializa as opções de seleção das categorias
         categoriaSelector.setItems(categorias_disponiveis);
@@ -121,8 +125,12 @@ public class EquipamentoControl {
         String busca = buscaField.getText();
         try{
             Equipamento buffer = EquipamentoDAO.buscarPorId(parseInt(busca));
-            equipamentos.setAll(buffer);
-            totalLabel.setText(equipamentos.size() + " equipamentos");
+            if(buffer == null){
+                alert("Equipamento com o ID " + busca + " não consta na tabela");
+            } else{
+                equipamentos.setAll(buffer);
+                totalLabel.setText(equipamentos.size() + " equipamentos");
+            }
         } catch(Exception NumberFormatException){
             alert("Insira um ID válido!");
         }
@@ -136,12 +144,18 @@ public class EquipamentoControl {
 
     @FXML
     public void removerEquipamento(ActionEvent event) {
-        String busca = buscaField.getText();
+        String busca = idRemoverField.getText();
         try {
             int id = parseInt(busca);
-            EquipamentoDAO.remover(id);
-            atualizarTabela();
-            limparCampos(null);
+            if(EquipamentoDAO.remover(id) == false){
+                alert("Equipamento com o ID " + busca + " não consta na tabela");
+            } else {
+                EquipamentoDAO.remover(id);
+                alert("Equipamento Removido!");
+                //limparCampos(null);
+                atualizarTabela();
+                idRemoverField.clear();
+            }
         } catch (NumberFormatException e) {
             alert("Digite um ID válido para remover.");
         }

@@ -7,17 +7,18 @@ package ui.GUI;
 
 import core.Equipamento;
 import core.EquipamentoDAO;
+import util.Verificador;
+
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import static java.lang.Integer.parseInt;
 
@@ -29,7 +30,7 @@ public class EquipamentoControl {
     @FXML private ChoiceBox<String> categoriaSelector;
     @FXML private ChoiceBox<String> categoriaSelectorBusca;
     @FXML private TextField detalhesField;
-    @FXML private TextField idRemoverField;
+    @FXML private TextField idGerenciarField;
 
     // tabela e colunas
     @FXML private TableView<Equipamento> tabela;
@@ -53,11 +54,11 @@ public class EquipamentoControl {
     @FXML
     public void initialize(){
         // Inicializa as colunas da tabela com os dados do Equipamento
-        colId.setCellValueFactory(cell -> new javafx.beans.property.SimpleIntegerProperty(cell.getValue().getId()).asObject());
-        colNome.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getNome()));
-        colCategoria.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getCategoria()));
-        colData.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getDataCadastro()));
-        colDetalhes.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getDetalhes()));
+        colId.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getId()).asObject());
+        colNome.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getNome()));
+        colCategoria.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getCategoria()));
+        colData.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getDataCadastro()));
+        colDetalhes.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getDetalhes()));
 
 
         // Inicializa as opções de seleção das categorias
@@ -84,24 +85,16 @@ public class EquipamentoControl {
 
     @FXML
     public void atualizarEquipamento(ActionEvent event) {
-        String busca = buscaField.getText();
-
+        String busca = idGerenciarField.getText();
+        alterarEquipamento alterar = new alterarEquipamento();
         try {
-            int id = parseInt(busca);
-            String novoNome = nomeField.getText();
-            //String novoTipo = tipoField.getText();
-
-            if (!novoNome.isEmpty()) {
-                EquipamentoDAO.atualizar(id, "nome", novoNome);
-            }
-            /*
-            if (!novoTipo.isEmpty()) {
-                EquipamentoDAO.atualizar(id, "categoria", novoTipo);
-            }
-             */
-
+            String coluna = alterar.escolherColuna();
+            alterar.alterarValor(
+                    parseInt(busca),
+                    coluna
+            );
             atualizarTabela();
-            limparCampos(null);
+            alert("Equipamento alterado com sucesso!");
         } catch (NumberFormatException e) {
             alert("Digite um ID válido para atualizar.");
         }
@@ -144,7 +137,7 @@ public class EquipamentoControl {
 
     @FXML
     public void removerEquipamento(ActionEvent event) {
-        String busca = idRemoverField.getText();
+        String busca = idGerenciarField.getText();
         try {
             int id = parseInt(busca);
             if(EquipamentoDAO.remover(id) == false){
@@ -154,7 +147,7 @@ public class EquipamentoControl {
                 alert("Equipamento Removido!");
                 //limparCampos(null);
                 atualizarTabela();
-                idRemoverField.clear();
+                idGerenciarField.clear();
             }
         } catch (NumberFormatException e) {
             alert("Digite um ID válido para remover.");
@@ -181,4 +174,60 @@ public class EquipamentoControl {
         alert.setContentText(msg);
         alert.showAndWait();
     }
+
+    // conjunto de metodos com um fim unico
+    private class alterarEquipamento{
+        ObservableList<String> colunas_disponiveis = FXCollections.observableArrayList(
+                "Nome",
+                "Categoria",
+                "Detalhes"
+        );
+
+        ChoiceDialog atualizar_eq_escolha = new ChoiceDialog("Escolha uma coluna", colunas_disponiveis);
+
+        TextInputDialog atualizar_eq_texto = new TextInputDialog();
+        private String escolherColuna(){
+            atualizar_eq_escolha.setTitle("Atualizar item");
+
+            Optional<String> resultado = atualizar_eq_escolha.showAndWait();
+
+            if(resultado.isPresent()){
+                return resultado.get();
+            }
+
+            return null;
+        }
+
+        private void alterarValor(int id_linha, String coluna){
+            Optional<String> resultado = Optional.empty();
+            ChoiceDialog atualizar_eq_novaCategoria = new ChoiceDialog("Escolha uma categoria", categorias_disponiveis);
+            if(coluna == "Categoria"){
+                atualizar_eq_novaCategoria.setTitle("Escolha a nova categoria");
+
+                resultado = atualizar_eq_novaCategoria.showAndWait();
+            } else{
+                atualizar_eq_texto.setTitle("Atualizar equipamento");
+                atualizar_eq_texto.setContentText("Digite o novo valor");
+
+                resultado = atualizar_eq_texto.showAndWait();
+            }
+
+            if(resultado.isPresent()){
+                while(true){
+                    if(coluna == "Categoria"){
+                        if(Verificador.validarCategoria(resultado.get()) == false){
+                            alert("Escolha uma categoria valida!");
+                            resultado = atualizar_eq_novaCategoria.showAndWait();
+                        }else{
+                            break;
+                        }
+                    }else{
+                        break;
+                    }
+                }
+                EquipamentoDAO.atualizar(id_linha, coluna, resultado.get());
+            }
+        }
+    }
+
 }

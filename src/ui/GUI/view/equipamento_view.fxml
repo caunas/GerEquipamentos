@@ -108,13 +108,14 @@
                                    <GridPane alignment="TOP_CENTER" hgap="15" layoutX="92.0" layoutY="54.0" prefHeight="39.0" prefWidth="803.0" vgap="15">
                                        <padding><Insets bottom="20" left="20" right="20" top="10" /></padding>
                                        <Label prefHeight="18.0" prefWidth="27.0" style="-fx-font-weight: bold;" text="ID:" textAlignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                                       <TextField fx:id="idRemoverField" prefHeight="30.0" prefWidth="120.0" promptText="ID" style=" -fx-background-radius: 4; -fx-border-color: #ced4da; -fx-border-radius: 4; -fx-padding: 5;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <TextField fx:id="idGerenciarField" prefHeight="30.0" prefWidth="120.0" promptText="ID" style=" -fx-background-radius: 4; -fx-border-color: #ced4da; -fx-border-radius: 4; -fx-padding: 5;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                            <GridPane.margin>
                                                <Insets />
                                            </GridPane.margin></TextField>
 
                                        <!-- Botões de Ação -->
-                                       <Button onAction="#removerEquipamento" style="-fx-background-color: #E74C3C; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 15; -fx-background-radius: 4; -fx-cursor: hand;" text="Remover por ID" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                       <Button onAction="#removerEquipamento" style="-fx-background-color: #E74C3C; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 15; -fx-background-radius: 4; -fx-cursor: hand;" text="Remover por ID" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                       <Button onAction="#atualizarEquipamento" style="-fx-background-color: #a55eea; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 15; -fx-background-radius: 4; -fx-cursor: hand;" text="Atualizar por ID" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                                        <columnConstraints>
                                            <ColumnConstraints />
                                            <ColumnConstraints />

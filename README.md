@@ -7,7 +7,7 @@ Sistema para cadastro e gerenciamento de equipamentos
 - [x] Cadastro, consulta e listagem de equipamentos
 - [x] Menu funcional com operações
 ### Metas Importantes
-- [ ] Atualização e exclusão funcionando corretamente
+- [x] Atualização e exclusão funcionando corretamente
 - [x] Validaçãode de entradas
 - [x] Projeto organizado com classes e métodos separados
 ### Metas desejáveis

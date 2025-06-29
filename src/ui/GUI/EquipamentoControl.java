@@ -89,10 +89,15 @@ public class EquipamentoControl {
         alterarEquipamento alterar = new alterarEquipamento();
         try {
             String coluna = alterar.escolherColuna();
-            alterar.alterarValor(
-                    parseInt(busca),
-                    coluna
-            );
+            if(coluna == null){
+                alert("Operação cancelada!");
+            } else{
+                alterar.alterarValor(
+                        parseInt(busca),
+                        coluna
+                );
+            }
+
             atualizarTabela();
             alert("Equipamento alterado com sucesso!");
         } catch (NumberFormatException e) {
@@ -175,8 +180,9 @@ public class EquipamentoControl {
         alert.showAndWait();
     }
 
-    // conjunto de metodos com um fim unico
+    // conjunto de metodos para alterar o valor de um item
     private class alterarEquipamento{
+        // lista de colunas disponiveis
         ObservableList<String> colunas_disponiveis = FXCollections.observableArrayList(
                 "Nome",
                 "Categoria",
@@ -189,13 +195,22 @@ public class EquipamentoControl {
         private String escolherColuna(){
             atualizar_eq_escolha.setTitle("Atualizar item");
 
-            Optional<String> resultado = atualizar_eq_escolha.showAndWait();
+            // verificador de coluna selecionada
+            while(true){
+                Optional<String> resultado = atualizar_eq_escolha.showAndWait();
 
-            if(resultado.isPresent()){
-                return resultado.get();
+                if(resultado.isPresent()){
+                    // se o resultado for diferente do placeholder, o loop é quebrado
+                    if(resultado.get() != "Escolha uma coluna"){
+                        return resultado.get();
+                    }
+                    else{
+                        alert("Escolha uma coluna para alterar");
+                    }
+                } else{
+                    return null;
+                }
             }
-
-            return null;
         }
 
         private void alterarValor(int id_linha, String coluna){
@@ -215,6 +230,7 @@ public class EquipamentoControl {
             if(resultado.isPresent()){
                 while(true){
                     if(coluna == "Categoria"){
+                        // usa o ultilitario para verificar se a categoria selecionada realmente existe
                         if(Verificador.validarCategoria(resultado.get()) == false){
                             alert("Escolha uma categoria valida!");
                             resultado = atualizar_eq_novaCategoria.showAndWait();

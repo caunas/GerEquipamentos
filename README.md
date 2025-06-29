@@ -17,7 +17,7 @@ Sistema para cadastro e gerenciamento de equipamentos
 
 ## Bibliotecas Usadas
 - **JavaFX** (versão 17 ou superior)
-- **JDK** (versão 11 ou superior)
+- **JDK** (versão 21)
 
 ## Contribuidores
 - [Cauan Nascimento](https://github.com/caunas) - Desenvolvedor Principal
@@ -29,5 +29,5 @@ Sistema para cadastro e gerenciamento de equipamentos
 ## Instruções de Build
 
 ### Pré-requisitos
-- JDK 11+ instalado
-- JavaFX SDK configurado (para desenvolvimento)
+- JDK instalado
+- JavaFX SDK configurado

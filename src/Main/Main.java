@@ -1,33 +1,41 @@
-package Main;
-
-// JavaFX
+import core.EquipamentoDAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+import java.io.FileNotFoundException;
+import java.net.URL;
 
-import java.io.FileNotFoundException; // complemento de exceções
-import java.net.URL; // lib de URL, converte o caminho do fxml para uma URL
-
+/**
+ * Classe principal da aplicação JavaFX para gerenciamento de equipamentos.
+ */
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
         try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/ui/GUI/view/equipamento_view.fxml"));
+            // Carrega os dados do arquivo CSV
+            EquipamentoDAO.carregarDoArquivo();
 
+            FXMLLoader loader = new FXMLLoader();
             URL fxmlUrl = getClass().getResource("/ui/GUI/view/equipamento_view.fxml");
             if (fxmlUrl == null) {
-                throw new FileNotFoundException("Arquivo FXML não encontrado no caminho: /ui/GUI/view/equipamento_view.fxml");
+                throw new FileNotFoundException("Arquivo FXML não encontrado: /ui/GUI/view/equipamento_view.fxml");
             }
 
+            loader.setLocation(fxmlUrl);
             Parent root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Gerenciamento de Equipamentos");
+
+            // Ao fechar a janela, salva os dados no arquivo
+            primaryStage.setOnCloseRequest(event -> {
+                EquipamentoDAO.salvarEmArquivo();
+            });
+
             primaryStage.show();
 
         } catch (Exception e) {
@@ -43,7 +51,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        // carregar interface grafica
         launch(args);
     }
 }

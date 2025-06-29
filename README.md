@@ -12,8 +12,8 @@ Sistema para cadastro e gerenciamento de equipamentos
 - [x] Projeto organizado com classes e métodos separados
 ### Metas desejáveis
 - [x] Interface gráfica
-- [ ] Uso de mais de uma estrutura de dados
-- [ ] Sistema modular com persistência básica
+- [x] Uso de mais de uma estrutura de dados
+- [x] Sistema modular com persistência básica
 
 ## Bibliotecas Usadas
 - **JavaFX** (versão 17 ou superior)

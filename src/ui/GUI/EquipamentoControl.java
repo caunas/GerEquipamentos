@@ -160,6 +160,8 @@ public class EquipamentoControl {
     public void limparCampos(ActionEvent event) {
         nomeField.clear();
         buscaField.clear();
+        detalhesField.clear();
+        idGerenciarField.clear();
     }
 
     @FXML

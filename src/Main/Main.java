@@ -1,3 +1,5 @@
+package Main;
+
 import core.EquipamentoDAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

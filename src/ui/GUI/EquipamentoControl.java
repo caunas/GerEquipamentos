@@ -7,6 +7,8 @@ package ui.GUI;
 
 import core.Equipamento;
 import core.EquipamentoDAO;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import util.Verificador;
 
 import javafx.beans.property.SimpleIntegerProperty;
@@ -17,6 +19,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +34,8 @@ public class EquipamentoControl {
     @FXML private ChoiceBox<String> categoriaSelectorBusca;
     @FXML private TextField detalhesField;
     @FXML private TextField idGerenciarField;
+    @FXML private TextField caminhoArquivoField;
+    @FXML private ChoiceBox<String> temaSelector;
 
     // tabela e colunas
     @FXML private TableView<Equipamento> tabela;
@@ -42,6 +47,7 @@ public class EquipamentoControl {
 
     // labels
     @FXML private Label totalLabel;
+    @FXML private Label statusPersistencia;
 
 
     private ObservableList<Equipamento> equipamentos = FXCollections.observableArrayList();
@@ -179,7 +185,46 @@ public class EquipamentoControl {
         alert.showAndWait();
     }
 
-    // conjunto de metodos para alterar o valor de um item
+    @FXML
+    private void carregarDados() {
+        // Criação do seletor de arquivos
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
+
+        File arquivoSelecionado = fileChooser.showOpenDialog(null);
+
+        if (arquivoSelecionado != null) {
+            try {
+                EquipamentoDAO.carregarBackup(arquivoSelecionado);
+                alert("Dados carregados com sucesso de: " + arquivoSelecionado.getAbsolutePath());
+                atualizarTabela();
+            } catch (Exception e) {
+                alert("Erro ao carregar: " + e.getMessage());
+            }
+        } else {
+            alert("Nenhum arquivo selecionado.");
+        }
+    }
+
+    @FXML
+    private void salvarDados() {
+        DirectoryChooser chooser = new DirectoryChooser();
+
+        File selectedDirectory = chooser.showDialog(null);
+        if (selectedDirectory != null) {
+            File arquivo = new File(selectedDirectory, "equipamentos.csv");
+
+            try {
+                EquipamentoDAO.exportarEmArquivo(arquivo);
+                alert("Dados salvos com sucesso em: " + arquivo.getAbsolutePath());
+            } catch (Exception e) {
+                statusPersistencia.setText("Erro ao salvar: " + e.getMessage());
+            }
+        } else {
+            statusPersistencia.setText("Nenhum diretório selecionado.");
+        }
+    }
+
     private class alterarEquipamento{
         // lista de colunas disponiveis
         ObservableList<String> colunas_disponiveis = FXCollections.observableArrayList(

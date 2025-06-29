@@ -127,10 +127,22 @@
                     <Tab text="Configurações">
                         <content>
                             <AnchorPane>
+                                <children>
+                                    <Label layoutX="397.0" layoutY="14.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Configurações do Sistema" />
+
+                                    <!-- Seção de Backup -->
+                                    <VBox layoutX="284.0" layoutY="50.0" prefHeight="145.0" prefWidth="454.0" spacing="15" style="-fx-padding: 20; -fx-border-radius: 5;">
+                                        <Label prefHeight="19.0" prefWidth="79.0" style="-fx-font-weight: bold; -fx-font-size: 16px;" text="Backup" />
+
+                                        <HBox alignment="CENTER_LEFT" spacing="10">
+                                            <Button onAction="#carregarDados" style="-fx-background-color: #3498db; -fx-text-fill: white;" text="Carregar Dados" />
+                                            <Button onAction="#salvarDados" style="-fx-background-color: #2ecc71; -fx-text-fill: white;" text="Salvar Dados" />
+                                        </HBox>
+                                    </VBox>
+                                </children>
                             </AnchorPane>
                         </content>
                     </Tab>
-
                 </tabs>
             </TabPane>
 
@@ -142,11 +154,11 @@
                 </HBox>
                 <TableView fx:id="tabela" style="-fx-pref-height: 300;">
                     <columns>
-                        <TableColumn fx:id="colId" text="ID" />
-                        <TableColumn fx:id="colNome" text="Nome" />
-                        <TableColumn fx:id="colCategoria" text="Categoria" />
-                        <TableColumn fx:id="colData" text="Data de Cadastro" />
-                        <TableColumn fx:id="colDetalhes" text="Detalhes" />
+                        <TableColumn fx:id="colId" prefWidth="32.0" text="ID" />
+                        <TableColumn fx:id="colNome" prefWidth="243.0" text="Nome" />
+                        <TableColumn fx:id="colCategoria" prefWidth="198.0" text="Categoria" />
+                        <TableColumn fx:id="colData" prefWidth="146.0" text="Data de Cadastro" />
+                        <TableColumn fx:id="colDetalhes" prefWidth="367.0" text="Detalhes" />
                     </columns>
                 </TableView>
             </VBox>

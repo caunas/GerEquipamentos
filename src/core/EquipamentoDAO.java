@@ -89,6 +89,17 @@ public class EquipamentoDAO {
         }
     }
 
+    public static void exportarEmArquivo(File arquivoExportar) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(arquivoExportar))) {
+            for (Equipamento eq : equipamentoLista) {
+                // Escreve cada equipamento no arquivo no formato CSV
+                writer.println(eq.getId() + "," + eq.getNome() + "," + eq.getCategoria() + "," + eq.getDetalhes());
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao exportar dados: " + e.getMessage());
+        }
+    }
+
     public static void carregarDoArquivo() {
         equipamentoLista.clear();
         try (BufferedReader reader = new BufferedReader(new FileReader(ARQUIVO))) {
@@ -108,6 +119,28 @@ public class EquipamentoDAO {
             }
         } catch (IOException e) {
             System.out.println("Arquivo não encontrado ou erro ao carregar: " + e.getMessage());
+        }
+    }
+
+    public static void carregarBackup(File arquivoBackup) {
+        equipamentoLista.clear();
+        try (BufferedReader reader = new BufferedReader(new FileReader(arquivoBackup))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                String[] partes = linha.split(",");
+                if (partes.length >= 4) {
+                    int id = Integer.parseInt(partes[0]);
+                    String nome = partes[1];
+                    String categoria = partes[2];
+                    String detalhes = partes[3];
+                    equipamentoLista.add(new Equipamento(id, nome, categoria, detalhes));
+                    if (id >= indiceProximo) {
+                        indiceProximo = id + 1;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar o backup: " + e.getMessage());
         }
     }
 

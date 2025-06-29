@@ -97,9 +97,6 @@ public class EquipamentoControl {
                         coluna
                 );
             }
-
-            atualizarTabela();
-            alert("Equipamento alterado com sucesso!");
         } catch (NumberFormatException e) {
             alert("Digite um ID válido para atualizar.");
         }
@@ -242,6 +239,8 @@ public class EquipamentoControl {
                     }
                 }
                 EquipamentoDAO.atualizar(id_linha, coluna, resultado.get());
+                atualizarTabela();
+                alert("Equipamento alterado com sucesso!");
             }
         }
     }

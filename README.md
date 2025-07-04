@@ -20,7 +20,7 @@ Sistema para cadastro e gerenciamento de equipamentos
 - **JDK** (versão 21)
 
 ## Contribuidores
-- [Cauan Nascimento](https://github.com/caunas) - Desenvolvedor Principal
+- [Cauan Nascimento](https://github.com/caunas) - Contribuições na interface gráfica e núcleo da aplicação
 - [Mariana Moreira](https://github.com/m4rimoreira) - Contribuições na interface gráfica e núcleo da aplicação
 - Vinicius Rios - Contribuições com validadores e interface de linha de comando (CLI) e núcleo da aplicação
 - [Robert Filipe](https://github.com/Lipe22md) - Contribuição com controladores e núcleo da aplicação

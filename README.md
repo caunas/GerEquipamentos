@@ -2,6 +2,7 @@
 
 ## Sobre o Projeto
 Sistema para cadastro e gerenciamento de equipamentos, feito para a disciplina de Estrutura de dados do curso de Ciências da Computação no Centro Universitário Jorge Amado (UNIJORGE)
+
 Orientadora: [Sheila Tirony]()
 
 ### Metas Essenciais

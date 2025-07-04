@@ -2,7 +2,7 @@ package ui.GUI;
 
 /**
  * Jeremias 29:11
- * Autores: Robert, Cauan
+ * Autores: Cauan
  **/
 
 import core.Equipamento;
